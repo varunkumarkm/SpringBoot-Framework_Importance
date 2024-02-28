@@ -1,0 +1,172 @@
+1) What is Spring data jpa?
+   -> * Spring data jpa makes it super easy to create the data access layer for our application, it says no longer
+      have to do all that boiler plate coding simply create a jpa entity class and the interface to extends 
+      CRUDRepository or JPARepository and will able to perform all the CRUD operations and much more on the database.
+      * Internally the quaries will be generated against the database table by simply defining the abstract methods
+      in the interfaces.
+      * It has inbuilt support for paging and sorting there is that come back JPQL gives us object oriented syntax
+      to perform quaries and we can also executes to native quaries where required, for this reason we use 
+      spring data jpa within our projects.
+       
+2) How to use the Spring data Jpa?
+   -> Step 1 - add the dependencies like Spring data Jpa and database driver for which database we are using to pom.xml 
+      file.
+      step 2 - We define one entity class that will represents database table mark with @Entity annotation, thencreate 
+      a repository interface extends one of the repository interfaces from Spring data jpa and tell it which entity 
+      to deal with and what is the primary key within that once we do that we can able to use this repository layer
+      in a controller or any other class whare we want to perform the CRUD operation from the database.
+      step 2 - Whithout written any sql and java code we simply define abstract method like 
+      ex: Coupon fincByCode(String code); 
+      it automatically generates the sql required to featch the data.
+      
+3) What is ORM(Object relational mapping)?
+   -> ORM is a programming technique used to map objects in an application to tables in a relational database. 
+      The primary goal of ORM is to eliminate the impedance mismatch that can exist between the object-oriented 
+      programming paradigm and the relational database model. 
+       
+4) What are the various Jpa associations?
+   -> 1) @OneToOne -> A person have only one license, license belongs to particular person.
+      2) @ManyToMany -> An order can have multiple products, a product can belong to multiple orders.
+      3) @OneToMany -> A customer can have multiple phone number
+      4) @ManyToOne -> A phone always belongs to a particular customer.
+   Also these relationships can occur in two configure them in modes 
+   
+   1) unidirectional - This means access this relationship in one order 
+      ex: configure one to many customer to phone number will not be able to access the customer using the phone
+          number entity, but we can access the phone number from the customer. That is unidirectional
+          
+   2) bi-directional - This means an access either of the objects or entities from either of them, even we navigate
+      customer to the phone number and phone number to the customer. That is bi-directional. 
+      
+5) What is cascading?
+   -> * Cascading is the process of propgating the non-select operations like insert, update, delete from the main
+      object in the association to the child object.
+      * We can control how the propgation is happen and what level and what operations using the 
+      cascade="persist" in the ManyToOne, OneToMany annotations. 
+      * cascade="persist" - It means an insert operation on the main object should be propagated to the child object 
+      * cascade="merge" - It means an insert and update operation on the main object should be propagated to the child 
+      object.
+      * cascade="remove" - It means delete the main object automatically the child object will be deleted.
+      * cascade="refresh" - It means automatically the child objects will be refreshed.
+      * cascade="detach" - It means automatically detached the child object, if we detach the parent object manually 
+      using the entity manager the child object will be detached 
+      * cascade="all" - It means works for all of this above, main object anything automatically child object will also 
+      effected.
+      
+6) What is lazy loading?
+   -> * When objects are associated or related with other objects an when the parent object is loaded, the child object 
+      can be loaded immadiatly which is known as eager loading. or they can featched on a on-demand basis which is known
+      as Lazy loading.
+      * Lazy loading is where the data in the association is featched on-demand when it is first used. Then the parent 
+      object will loaded it will not be loaded right away.
+      * We enabling the lazy loading in our application using this annotations
+      
+      * @OneToMany(featch=FeatchType.EAGER) - attribute can featch it takes two values, FeatchType is an enumaration which 
+      has two values EAGER which will featch the data right away as soon as the parent is loaded the child will also be 
+      loaded.
+      * ManyToMany(featch=FeatchType.LAZY) - Once we choose this it will featch the data only when the child data is acessed
+      for the first time in the application.
+      
+7) What are the two levels of caching?
+   -> Level 1 - Session
+      Level 2 - SessionFactory
+      Session and SessionFactory are the low level hibernate objects which are internally used by hibernate and when we did't 
+      have JPA we did'nt have a spring data we use to directly these two in our applications.
+      * Caching providers are:
+        1) ehcache - It is the most popular one and very easy to congfigure and very powerful 
+        2) swaram cache
+        3) Jboss Tree cache
+        4) OS cache
+        5) Tangosol Cache etc. 
+        
+8) How to configure second level Cache?
+   -> * step 1 - add this dependency
+	      <dependency>
+	           <groupId>org.hibernate<groupId>
+	           <artifactId>hibernate ehcache<artifactId>
+	      </dependency>
+   
+      * step 2 - Create a configuration file 
+           <ehcache> 
+               <diskStore path="java.io.tmpdir"/>
+               <defaultCache maxElementsInMemory="100" eternal="false" timeToIdleSeconds="5" 
+                timeToLiveSeconds="10" overFlowToDisk="true">
+           </ehcache>
+           
+      * step 3 - Go to the application.properties
+        spring.jpa.properties.hibernate.cache.use_second_level_acahe=true
+        //configure the region factory
+        spring.jpa.properties.hibernate.cache.region.factory_class=org.hibernate.cache.ehcache.EhCacheRegionFactory
+        //point it to the configuration file
+        spring.cache.ehcache.config=classpath:ehcache.xml
+        
+      * strp 4 - Mark an entity class which I want to cache using the @Cache annotation specify the caching strategy
+        ex: @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+                 
+                
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+     
+  

@@ -1,0 +1,455 @@
+Important notes for spring boot interview perspective:
+
+1) What is dependency injection injection? and what is IOC(Inversion of control)?
+   ->  When we develops software applications we organized our code across components and in case of java these
+       components are classes.
+       Ex: Here we have a two classes,
+       
+          class ProductController {                  class ProductDao {  
+           private ProductDao productDao;          
+                create() {                                 saveData() {              
+                                                           ........
+                }                                           }
+              }                                           }   
+             } 
+   * Here we have a ProductDao class on the right side, it will performing all the database operations and 
+     left side we have a ProductController class is a web layer class which uses the ProductDao, 
+   * instead of we creating a object of ProductDao inside the ProductController we delegate this responsibility
+     into external frameworks or components like Spring. 
+   * Spring at runtime dynamically create of an object this ProductDao and injected into the ProductController.
+   * The ProductController can then use the ProductDao inside its methods, this process of external components
+     or modules creating the dependencies and injecting into them required classes is known as dependency injection.
+   * We developers need not worry about creating objects and all that we can focus on the business logics instead.
+   * The process of moving this control object creation from the class to and external component or modules like
+     spring is called inversion of control(IOC).
+   * IOC is design pattern where we are giving away or inverting the object creation from our application code
+     to the external component like the spring.   
+      
+2) What are the two different spring bean scopes?
+   -> 1) Singleton   2) Prototype.
+   
+   1) Singleton: It is were only one instance of a bean will be created for the entire IOC container and the 
+      same instance will be injected where ever required. It is a default scope. 
+      
+   2) Prototype: If we configure the prototype bean then multiple instances of the beans will be created and 
+      injected where ever required
+      
+   when we use Singleton and when prototype.
+   -> * If our application is needs statelessness, or if our application classes are been stateless, we can go
+        with the Singleton. Like controllers DAOs etc which do not have any state within them and if they have
+        state, then will have to go with the prototype scope. Because if we have state with singleton that data
+        can be corrupted across multiple threads, but we don't have to worry multiple threads in prototype 
+        because each thread will it gets own instance of a bean.
+        
+   Can we prototype bean will be injected into a singleton bean?
+   -> yes, Once the prototype bean is injected into the singleton bean at runtime, the same instance of the 
+      prototype will be used by the singleton bean.
+      
+3) What are different spring bean HTTP context scopes?
+   -> They are: 1) request      2) session    and 3) global
+   
+   1) request: A request scope is were a new bean instance will be created for every HTTP request coming in.
+   2) session: A session scope is were there will be only one bean instance used across the session 
+   3) global : A global or global session makes only if we are using potlets within our application and the 
+               this scope applied across the potlets like a global session and same bean will be used across 
+               the global sessions or potlets.
+               
+4) Why using spring boot? what are advantages of using the spring boot
+   -> The first advantages is:
+      1) Auto configuration: This means we no longer need to write a lot of xml or java based configuration to 
+         configure spring MVC to create the web layer or ORM using hibernate spring data jpa etc.
+         * Once we add the required dependency the DisPatcher servlet will be configured for our web layer
+           a data source will created for our ORM layer if we use the spring data jpa and also a 
+           TransactionManager is created and injected as well. without as writing code.
+            
+      2) We don't need to worry about Module Availability and version compatible across these library or modules
+         Spring Boot Starters provided by the spring development team these starters are ready to be used in our
+         projects. are:
+         * Spring-Boot-Starter-parent * spring-boot-starter-web  * spring-boot-starter-data-jpa
+           we deploying our application, once it is ready to production to any other container we are usable for
+           Embeded-servlet-container like: Tomcat, Jetty,  Undertow using this servers we can easily launch our 
+           application.
+         * Spring boot also offers Spring Boot Actuators which allow us to do health checks 
+           we adding the dependency of Spring Boot Actuators it will gives us to
+           * autoConfig    * mappings    * info   *health   * metrics
+           
+5) What is @SpringBootApplication?
+   -> It is the starting point of the every spring boot applications where all the magic happens, it is a 
+      top level annotation which having three other annotations inside it they are:
+      
+      1) @SpringBootConfiguration - it tells the spring boot main class have the bean definition, we can defines
+         various methods that will expose out beans which will be later on used by the spring boot for dependency
+         injection wherever required within our application.
+         
+      2) @EnableAutoConfiguration - it tells the spring boot to enable and use auto configuration based on the 
+         dependencies we have on the class path.
+         
+      3) @ComponentScan - it tells the spring boot it should scan through all the sub packages of the current package 
+         wherever this class leaves which is marked with the componentScan annotation indirectly through the 
+         SpringBootApplication it should scan that package and all the sub-packages for the spring beans that are 
+         marked with @Service, @Repository, @Component etc. for use them dependency injection at runtime.
+         
+6) What is @SpringBootTest?
+   -> It uses a spring extension class to run our test @Test jUnit annotation, this extension class knows how to search 
+      for a class within our application that is marked with @SpringBootApplication use this class to create entire spring
+      context for our application.
+      
+7) What are the different spring boot annotation are there?
+   -> @Component, @Controller, @Service, @Repository, @RestController etc, are the Stereotype annotations.
+      which tells to spring boot a bean of this class marked with these annotations we created and used.
+      
+      Stereotype annotations when apply to a class register the class with the application context, once the 
+      class is register the application context, it is now available for dependency injection in other classes.
+      
+      some of the Stereotype annotations are:
+      These annotations are gives us to better readabality. 
+   1) @Component: When we mark a class this annotation, This is a very genric annotation that can be apply to any
+      spring managed component.
+   2) @Controller - is used to controller class on the spring MVC we application to handle the HTTP request.
+   3) @RestController - it is a specialized annotation taht we used to mark our Restful endpoints.
+   4) @Service - is used on classes where we put our business logics.
+       Spring can add additional functionality using the @Transactional behaviour at using @Service annotation
+       which is not available on controller and repository in the future.
+   5) @Repository - is used to data access layer or persistence layer classes, acess the database layer 
+   
+8) Some more annotations of the spring boot are:
+   1) @Configuration - It is a class level annotation, when we apply it a class it indicates that the class is 
+      used by spring container as the source for the spring bean definations.
+      
+   2) @Bean - This annotation is used to mark a method, this annotation is indicates the bean returned from the
+      method should be registered in the spring context.
+      
+   3) @Autowired - It tells the spring container a particular field should be automatically wired, we can use 
+      this annotations for the data member on a constructor or even a setter method.
+      
+   4) @Qualifier - It is used to inject the bean by name, by default when we use the autowired annotation
+      bean will be injected by type, but we want to qualify a particular bean for injection by using its name
+      use the @Qualifier annotation.
+      
+   5) @Required - As the name itself says marks a particular field to be mandatory. we can use it an a setter
+      method, it will make that particular field mandatory for the dependency injection.
+      
+   6) @Scope - This annotation is by default the beans in spring context or in singlton scope, if I want to change
+      the prototype using this annotation.
+      
+9) What is the spring boot actuator?
+   -> * It provides insights about the spring boot applications once its up and running, it uses application 
+      context information the autoconfiguration that were enabled, the MVC mapping and several other metrics
+      * /actuator - It exposes various end points starting with, /actuator when we hit this endpoint this is like a discovery
+      page for all the other rest endpoints provided by actuator.
+      * /autoConfig - It will give us all the automatic configurations that spring boot as enabled for our application
+      * /congigprops - It will give us all the configurations properties we have configured for our applications.
+      * /beans - It will shows us a all the beans that are created by spring.
+      * /dump - Thread dump of our application.
+      * /health - It shows the status is the application is up or down.
+      * /info - will give us all the information that we have provided for the apllication for others to understand 
+                what this application does.
+      * /logfile - will help us retrive the logfile at any point provided. we set a property called log.file
+                   in the application.properties and point it to the log file.
+      * /metrics - will give us various metrics such as memory that our application is using the disc space etc.
+      * /caches - will give us the caching information of our application and ther few other endpoints etc. 
+      
+      
+      
+      AOP(Aspect oriented programming)
+
+We looking at one enterprise application is typically divided into layers are:
+1) UI Layer
+2) Business Logic Layer
+3) Data Access Layer ans many more 
+  
+   All this layers typically have some non-functional requirements like:
+   * security - securing our application
+   * profiling - To see how our application is performing 
+   * logging - write our errors or informations to the log files 
+   * transaction management - used for database management
+   These are called cross-cutting conserns, these are required across this layer as well as across the application 
+   These are all applied to our application at the runtime doing that will have several advantages are:
+   * Cross Cutting Concerns - we can address all the requirements which are common across the enterprise or even enterprises.
+   * Reuse - allowing us to reuse.
+   * Quick Development - We can focus on our business logic without worring about the non-functional requirements.
+   * Focus on one aspect
+   * Enable/Disabled at the runtime.
+   
+What are the four important terminology of aspect oriented programming?
+-> 1) Aspect - It is a plan java class that can contains a number of advices and pointcuts, this class is where we address
+      a particular cross cutting concerns for our application this could be security, transaction management, logging etc.
+   2) Advice - Aspect is made up number of advises, advice is a method that address a part of the concern
+   3) Pointcut - It provides an expressional language its like a regular expression language to match a particular joinpoints
+      It give as syntax to express join points.
+   4) Joinpoints - It is a point in the java program where the advice needs to be applied this could be a method or field
+      or a constructor once we develop an aspect a lot of methods we need to apply those methods to the other classes and
+      then methods in our java application that is where joinpoints come in.
+      
+      ex: class MySecurityAspect {                         
+          @Pointcut("execution(* myMethod(..))")
+          void applySecurity(){ //advice
+                          
+       when we using joinPoint 
+       before, after, after-returning, after-throwing, around                   
+                       
+                
+       
+        
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      

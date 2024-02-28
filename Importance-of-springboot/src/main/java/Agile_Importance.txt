@@ -1,0 +1,123 @@
+1) Breafly explain what scrum is?
+   -> * Scrum is a agile software development model or framework that follows the iterative or incremental approach
+        so that we can get quick feedback and adopt to the changing markets or customer needs. 
+      * In Scrun we work in sprint, it is time box development effort it can be 1,2,3,4 weeks 1 week sprints are
+        very rare. We are various ceromoneys or meeting in scrum write at the beginning of the sprint, sprint
+        planning or meeting where we pull the work for that sprint from the product backlog into the sprint backlog
+        within assign this work to developers, testers and other members as this work gets done.
+      * we have other ceromoney every day call a stand-up meeting where in discuss the progress 
+      * At the end of the sprint will demonstrate the all the work that is done to the product owners or the 
+        customers to get the approval.
+      * And also sprint Retrospective meeting at the end of every sprint to see what went well in the privous spring
+        and what did't go well, and what can be improved which is very key feature of any agile development framework
+        or model 
+        
+2) What are the Roles and responsibilities on a scrum team?
+   -> * It all starts with the product owner then have architecture, developers, testers, the scrum master and some 
+        cases will have the Devops engineer on the team.
+      * A product owner one who interacts with the customer and he comes up with the requirements the rest of the team
+        to work on it.
+      * The developers, testers and the architects work closly with the owner in understanding the requirements and 
+        delevering the product.
+      * The architects ensure that the application architecture impact and the deliver the non functional requirements
+        such as scalibility, security, deployment etc.
+      * Also ensure that the developers and testers are following the industry standards and guidlines.
+      * Developers work closly with the product owner, understanding the requirement and with the architects to 
+        implements the requirements in the right way as the develop the product.
+      * Once the developer develop the feature, they will deliver to the testers who is responsible for the QA
+      * Testers again work closely with the product owner to understand the requirement and get the acceptance
+        criteria as per the product owner and the test the application deliver as per those requirements.
+        They also work closely with the architects to automate the testing process by following the guidelines.
+      * Scrun master who is the key on every scrum team, here ensures that all the ceramonies like planning, standup 
+        meetings, retrospective meeting are done correctly and also if the developers, testers are the architects
+        any impedments or roadblocks with other teams he will ensore that and resolved.
+        * Also defend the team, if any destractions caused by other teams in the company.
+      * Devops teams which is optionally, developers, testers, and architects usually works with the devops team, which 
+        will have their own team to get our feature or product to the production. 
+              
+3) What is sprint planning?
+   -> * It happens at the beginning of the new sprint or in between two sprints we are the team 
+        scrum master, architects, developers and testers meet with the product owner and pull the stories to 
+        works in that sprint. So we come up with the spring backlog, the developers, QAs and other team members will then 
+        pull the they want to work on.
+      * The product owner and the scrun master ensure that everybody on the team as enif work for that sprint and then
+        will able to deliver whatever we promised in the sprint backlog.
+        
+4) What is a standup meeting?
+   -> A standup also known as scrum meeting or just scrum happens 	everyday tipically in the morning, where all team
+      members architects, developers, QAs will meet and share the status of their current work, that is the stories
+      they are working on.
+      A tipically use 3 sentenses  
+      1) What they have done the previous day
+      2) What they will working on today and 
+      3) If they have any impedements they will state them as well, that is roadblocks to their work then other 
+         teams are help them to roadblocks and scrum master can get them resolved after the standup meeting.
+      A stand-up meetings are sort typically 5-10 min where each person talks not more than a 10 mins but some
+      times it might go longer, that is where the scrum master comes in and ensure that they are sort to the point
+      and if they anything else that as to taken up he will say take it offline after the meeting.
+      The product owners typically says out of the scrum meeting, once in a while just see how things are going within the 
+      sprint and if we are on track.
+      The advantages of the stand-up meetings is to know how things are moving within a sprint and there are any
+      roadblocks resolve them right away and if there are any issue we learn from them and move on its the key in agile
+      software development.
+      
+5) What is the Sprint Retrospective meeting?
+   -> This meeting is happens for the end of each sprint where the entire team meet its usually without the management
+      that we can talk and share our thoughts freely and discuss 3 important things are:
+      1) What went well in the previous sprint.
+      2) What didt go well as aspected.
+      3) Insights for the future both from what went well and what didt go as aspected.
+         Track should not repeat.
+       
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+           
+      
