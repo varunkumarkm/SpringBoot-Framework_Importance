@@ -1,0 +1,4 @@
+package com.eazybytes.loans.mapper;
+
+public class LoansMapper {
+}
